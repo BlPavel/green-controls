@@ -1,0 +1,9 @@
+<form action="" [formGroup]="form" (ngSubmit)="onSubmit()" grMarkAsTouched>
+  <ng-container *ngIf="isShow">
+    <gr-input-text formControlName="name" [dataInput]="dataName"></gr-input-text>
+    <input type="checkbox" formControlName="check">
+    <gr-form-passport formControlName="passport"></gr-form-passport>
+  </ng-container>
+  <button type="button" (click)="changeShow()">changeShow</button>
+  <button type="submit">Submit</button>
+</form>

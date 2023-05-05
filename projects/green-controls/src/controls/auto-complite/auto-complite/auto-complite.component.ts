@@ -91,6 +91,10 @@ export class AutoCompliteComponent<T> extends AbstractWrapperInput implements On
         this.validators = changes['dataAutoComplite'].currentValue?.validators;
         this.setValidators();
       }
+      if (changes['dataAutoComplite'].currentValue?.asyncValidators) {
+        this.asyncValidators = changes['dataAutoComplite'].currentValue?.asyncValidators;
+        this.setAsyncValidators();
+      }
     }
   }
 
@@ -129,6 +133,7 @@ export class AutoCompliteComponent<T> extends AbstractWrapperInput implements On
       });
 
     this.setValidators();
+    this.setAsyncValidators();
   }
 
   ngAfterContentInit(): void {

@@ -81,6 +81,10 @@ export class InputFieldComponent extends AbstractWrapperInput implements OnChang
         this.validators = changes['dataField'].currentValue?.validators;
         this.setValidators();
       }
+      if (changes['dataField'].currentValue?.asyncValidators) {
+        this.asyncValidators = changes['dataField'].currentValue?.asyncValidators;
+        this.setAsyncValidators();
+      }
     }
   }
 

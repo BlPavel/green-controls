@@ -1,5 +1,13 @@
 import {
-  Directive, Input, OnDestroy, OnInit, Optional, Renderer2, Self, SkipSelf,
+  AfterViewInit,
+  Directive,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+  Self,
+  SkipSelf,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MarkAsTouchedDirective } from './mark-as-touched.directive';
@@ -10,7 +18,7 @@ import { SetErrorMessageDirective } from './set-error-message.directive';
   providers: [ MarkAsTouchedDirective ],
   standalone: true,
 })
-export class MarkTouchedInputDirective implements OnInit, OnDestroy {
+export class MarkTouchedInputDirective implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   public set isDisabled(disabled: boolean) {
     if (disabled !== this._disabled) {
@@ -21,7 +29,7 @@ export class MarkTouchedInputDirective implements OnInit, OnDestroy {
 
   private _disabled: boolean = false;
 
-  private _submitListener!: () => void;
+  private _submitListener?: () => void;
 
   constructor(
     @Optional() @SkipSelf() private readonly _markAsTouchedDirective: MarkAsTouchedDirective,
@@ -46,7 +54,18 @@ export class MarkTouchedInputDirective implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit(): void {
+    const form: HTMLElement = this._markAsTouchedDirective.element.nativeElement;
+    Promise.resolve().then(() => {
+      if (form.classList.contains('ng-submitted')) {
+        this._markAsTouched();
+      }
+    });
+  }
+
   ngOnDestroy(): void {
-    this._submitListener();
+    if (this._submitListener) {
+      this._submitListener();
+    }
   }
 }

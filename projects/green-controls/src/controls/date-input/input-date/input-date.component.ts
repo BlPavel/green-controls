@@ -73,6 +73,10 @@ export class InputDateComponent extends AbstractWrapperInput implements OnChange
         this.validators = changes['dataDateInput'].currentValue?.validators;
         this.setValidators();
       }
+      if (changes['dataDateInput'].currentValue?.asyncValidators) {
+        this.asyncValidators = changes['dataDateInput'].currentValue?.asyncValidators;
+        this.setAsyncValidators();
+      }
     }
   }
 

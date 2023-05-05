@@ -2,6 +2,7 @@ import {
   Directive, EventEmitter, OnChanges, OnDestroy, OnInit, Output, SimpleChanges,
 } from '@angular/core';
 import {
+  AsyncValidatorFn,
   ControlValueAccessor, FormControl, ValidatorFn, Validators,
 } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -43,6 +44,8 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
   protected subscribe?: Subscription;
 
   protected validators?: Validators[];
+
+  protected asyncValidators?: AsyncValidatorFn[];
 
   protected isDisabled: boolean = false;
 
@@ -116,6 +119,10 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
         this.validators = changes['dataInput'].currentValue?.validators;
         this.setValidators();
       }
+      if (changes['dataInput'].currentValue?.asyncValidators) {
+        this.asyncValidators = changes['dataInput'].currentValue?.asyncValidators;
+        this.setAsyncValidators();
+      }
     }
   }
 
@@ -128,6 +135,7 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
     });
 
     this.setValidators();
+    this.setAsyncValidators();
   }
 
   protected onBlur() {
@@ -159,6 +167,17 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
     if (this.validators && this.validators.length > 0) {
       this.validators.forEach((item) => {
         this.control.addValidators(item as ValidatorFn);
+      });
+    }
+  }
+
+  protected setAsyncValidators(): void {
+    if (this.asyncValidators?.length === 0) {
+      this.control.clearAsyncValidators();
+    }
+    if (this.asyncValidators && this.asyncValidators.length > 0) {
+      this.asyncValidators.forEach((item) => {
+        this.control.addAsyncValidators(item as AsyncValidatorFn);
       });
     }
   }
