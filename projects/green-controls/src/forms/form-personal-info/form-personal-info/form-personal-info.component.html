@@ -1,0 +1,78 @@
+<form [formGroup]="form">
+  <ng-container *ngIf="isInRow; else inColumn">
+    <div class="sbi-form__block__row">
+      <gr-input-text
+        class="sbi-form__block__col_6 me-md-15"
+        formControlName="surname"
+        [dataInput]="dataPersonalInfo.surname"
+        grToUppercase
+      ></gr-input-text>
+
+      <gr-input-text
+        class="sbi-form__block__col_6 me-md-15"
+        formControlName="name"
+        [dataInput]="dataPersonalInfo.name"
+        grToUppercase
+      ></gr-input-text>
+    </div>
+
+    <div class="sbi-form__block__row">
+      <gr-input-text
+        class="sbi-form__block__col_6 me-md-15"
+        formControlName="patronimyc"
+        [dataInput]="dataPersonalInfo.patronimyc"
+        grToUppercase
+      ></gr-input-text>
+      <div class="sbi-form__block__col_6 ms-md-15">
+        <mat-checkbox color="primary" class="checkbox" formControlName="isExistPatronymic"> Отчество отсутствует </mat-checkbox>
+      </div>
+    </div>
+
+    <div class="sbi-form__block__row">
+      <gr-input-date
+        class="sbi-form__block__col_6"
+        formControlName="dateOfBirth"
+        [dataDateInput]="dataPersonalInfo.dateOfBirth"
+      ></gr-input-date>
+    </div>
+  </ng-container>
+
+  <ng-template #inColumn>
+    <div class="sbi-form__block__row">
+      <gr-input-text
+        class="sbi-form__block__col_6 me-md-15"
+        formControlName="surname"
+        [dataInput]="dataPersonalInfo.surname"
+        grToUppercase
+      ></gr-input-text>
+    </div>
+
+    <div class="sbi-form__block__row">
+      <gr-input-text
+      class="sbi-form__block__col_6 me-md-15"
+      formControlName="name"
+      [dataInput]="dataPersonalInfo.name"
+      grToUppercase
+    ></gr-input-text>
+    </div>
+
+    <div class="sbi-form__block__row">
+      <gr-input-text
+        class="sbi-form__block__col_6 me-md-15"
+        formControlName="patronimyc"
+        [dataInput]="dataPersonalInfo.patronimyc"
+        grToUppercase
+      ></gr-input-text>
+    </div>
+
+    <div class="sbi-form__block__row">
+      <gr-input-date
+        class="sbi-form__block__col_6"
+        formControlName="dateOfBirth"
+        [dataDateInput]="dataPersonalInfo.dateOfBirth"
+      ></gr-input-date>
+    </div>
+  </ng-template>
+
+</form>
+

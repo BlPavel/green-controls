@@ -1,0 +1,27 @@
+.passport-form {
+  &__passport-info {
+    &__row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    &__col_6 {
+      min-width: 100px;
+      flex: 1 1 0;
+    }
+
+    &__col_6:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    @media (max-width: 540px) {
+      &__col_6 {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        flex: 0 0 auto;
+      }
+    }
+  }
+}

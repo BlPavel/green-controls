@@ -1,0 +1,26 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    [matAutocomplete]="complite"
+    placeholder="{{ placeholder }}"
+    (blur)="onBlur()"
+    grSetErrorMessage
+    [customErrorMessage]="customErrorMessage"
+    [valueChange]="control.value"
+    [formControl]="control"
+    grMarkTouchedInput
+    [isDisabled]="isDisabled"
+  />
+  <mat-autocomplete #complite="matAutocomplete" [displayWith]="displayFn">
+    <mat-option
+      *ngFor="let valueAutoComplete of valuesAutoComplete; let i = index"
+      [value]="valueAutoComplete"
+      (onSelectionChange)="SelectChange(valueAutoComplete)"
+    >
+      {{ getValueOnDisplay(i) }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="messageError$ | async as messageError">{{ messageError }}</mat-error>
+</mat-form-field>

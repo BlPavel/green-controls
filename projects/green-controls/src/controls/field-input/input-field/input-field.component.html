@@ -1,0 +1,21 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="{{ sizeMinRows }}"
+    [formControl]="control"
+    (blur)="onBlur()"
+    placeholder="{{ placeholder }}"
+    grSetErrorMessage
+    [connectInput]="connectInput"
+    [customErrorMessage]="customErrorMessage"
+    [valueChange]="control.value"
+    [grConfirmEqualValidator]="connectInput"
+    maxlength="{{ maxLength }}"
+    grMarkTouchedInput
+    [isDisabled]="isDisabled"
+    [autocomplete]="autoComplete"
+  ></textarea>
+  <mat-error *ngIf="messageError$ | async as messageError">{{ messageError }}</mat-error>
+</mat-form-field>

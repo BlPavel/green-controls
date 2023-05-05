@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+  <div class="sbi-form__block__row">
+    <gr-input-tel
+    class="sbi-form__block__col_6"
+    formControlName="phone"
+    [dataInput]="dataContacts.phone"
+    ></gr-input-tel>
+  </div>
+
+  <div class="sbi-form__block__row">
+    <gr-input-email
+      class="sbi-form__block__col_6"
+      [ngClass]="{ 'me-md-15': isEmailsPerRow }"
+      formControlName="email"
+      [dataInput]="dataContacts.email"
+    ></gr-input-email>
+    <gr-input-email
+      *ngIf="isEmailsPerRow"
+      class="sbi-form__block__col_6 ms-md-15"
+      formControlName="repeatEmail"
+      [dataInput]="dataContacts.repeatEmail"
+    ></gr-input-email>
+  </div>
+
+  <div class="sbi-form__block__row">
+    <gr-input-email
+      *ngIf="!isEmailsPerRow"
+      class="sbi-form__block__col_6"
+      formControlName="repeatEmail"
+      [dataInput]="dataContacts.repeatEmail"
+    ></gr-input-email>
+  </div>
+</form>

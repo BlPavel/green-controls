@@ -1,0 +1,27 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    inputmode="numeric"
+    [matDatepicker]="picker"
+    [formControl]="control"
+    (blur)="onBlur()"
+    placeholder="{{ placeholder }}"
+    maxlength="{{ maxLength }}"
+    grSetErrorMessage
+    [connectInput]="connectInput"
+    [customErrorMessage]="customErrorMessage"
+    [valueChange]="control.value"
+    [isTouchedDateToggle]="isTouchedDateToggle"
+    [grConfirmEqualValidator]="connectInput"
+    [min]="minDate"
+    [max]="maxDate"
+    grDateMask
+    grMarkTouchedInput
+    [isDisabled]="isDisabled"
+  />
+  <mat-datepicker-toggle matIconSuffix [for]="picker" (click)="onClick()"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <mat-error *ngIf="messageError$ | async as messageError">{{ messageError }}</mat-error>
+</mat-form-field>

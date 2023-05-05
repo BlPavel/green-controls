@@ -1,0 +1,26 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="email"
+    matInput
+    [formControl]="control"
+    (blur)="onBlur()"
+    placeholder="{{ placeholder }}"
+    grSetErrorMessage
+    [connectInput]="connectInput"
+    [customErrorMessage]="customErrorMessage"
+    [valueChange]="control.value"
+    [grConfirmEqualValidator]="connectInput"
+    maxlength="{{ maxLength }}"
+    mask="{{ mask }}"
+    prefix="{{ prefix }}"
+    suffix="{{ suffix }}"
+    [showMaskTyped]="showMaskTyped"
+    [dropSpecialCharacters]="dropSpecialCharacters"
+    grMarkTouchedInput
+    [isDisabled]="isDisabled"
+    autocomplete="none"
+    autocomplete="of"
+  />
+  <mat-error *ngIf="messageError$ | async as messageError">{{ messageError }}</mat-error>
+</mat-form-field>

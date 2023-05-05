@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+  <div class="sbi-form__block__row">
+    <div class="sbi-form__block__col_6 me-md-15">
+      <div class="passport-form__passport-info__row">
+        <gr-input-number
+          class="passport-form__passport-info__col_6"
+          formControlName="seria"
+          [dataInput]="dataPassportInfo.seria"
+        ></gr-input-number>
+
+        <gr-input-number
+          class="passport-form__passport-info__col_6"
+          formControlName="no"
+          [dataInput]="dataPassportInfo.no"
+        ></gr-input-number>
+      </div>
+    </div>
+
+    <gr-input-date
+      class="sbi-form__block__col_6 ms-md-15"
+      formControlName="dateOfIssue"
+      [dataDateInput]="dataPassportInfo.dateOfIssue"
+    ></gr-input-date>
+  </div>
+
+  <ng-container *ngIf="hasIssue && dataPassportInfo.authority && dataPassportInfo.issuerCode">
+    <div class="sbi-form__block__row">
+      <gr-input-field
+        class="sbi-form__block__col_12"
+        formControlName="authority"
+        [dataField]="dataPassportInfo.authority"
+      ></gr-input-field>
+    </div>
+
+    <div class="sbi-form__block__row">
+      <gr-input-text
+        class="sbi-form__block__col_6"
+        formControlName="issuerCode"
+        [dataInput]="dataPassportInfo.issuerCode"
+      ></gr-input-text>
+    </div>
+  </ng-container>
+</form>
+
