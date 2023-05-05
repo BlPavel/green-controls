@@ -1,9 +1,11 @@
-<form action="" [formGroup]="form" (ngSubmit)="onSubmit()" grMarkAsTouched>
-  <ng-container *ngIf="isShow">
-    <gr-input-text formControlName="name" [dataInput]="dataName"></gr-input-text>
-    <input type="checkbox" formControlName="check">
-    <gr-form-passport formControlName="passport"></gr-form-passport>
-  </ng-container>
-  <button type="button" (click)="changeShow()">changeShow</button>
-  <button type="submit">Submit</button>
-</form>
+<div class="wrapper">
+  <header class="header">
+    <h1 class="header__title">Green controls</h1>
+  </header>
+  <div class="conteiner">
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="footer">Current version 1.0.0</footer>
+</div>
+
+

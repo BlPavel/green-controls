@@ -1,0 +1,55 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-base"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          { "type": "attribute", "style": "camelCase" }
+        ],
+        // This rule requires the TypeScript type checker to be present when it runs
+        "import/prefer-default-export": ["off"],
+        "import/no-unresolved": "off",
+        "no-multi-spaces": "error",
+        "max-len": ["error", { "code": 140 }],
+        "no-var": "error",
+        "no-use-before-define": "error",
+        "array-bracket-newline": ["error", { "multiline": true, "minItems": 4 }],
+        "array-bracket-spacing": ["error", "always"],
+        "array-element-newline": ["error", { "minItems": 4 }],
+        "no-trailing-spaces": "error",
+        "arrow-spacing": "error",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "linebreak-style": "off",
+        "dot-notation": "off",
+        "no-underscore-dangle": "off",
+        "class-methods-use-this": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/extensions": ["off", "never", { "ignorePackages": true }],
+        "guard-for-in": "off",
+        "no-restricted-syntax": "off",
+        "no-useless-constructor": "off",
+        "no-empty-function": "off",
+        "no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+        "no-undef": "off",
+        "no-plusplus": "off"
+      },
+      "plugins": ["import"]
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}
