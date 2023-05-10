@@ -1,1 +1,7 @@
-<p>main works!</p>
+<nav class="navigation">
+  <ng-container *ngFor="let title of titleCards; let i = index">
+    <app-card-item [title]="title" [link]="links[i]"></app-card-item>
+  </ng-container>
+
+</nav>
+

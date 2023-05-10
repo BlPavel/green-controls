@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { GreenBasicInputModule, MessageErrorModule } from 'green-controls/src/controls';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IMessageError } from 'green-controls/src/interfaces';
 import { MarkAsTouchedDirective } from 'green-controls/src/directives';
 import { GreenFormPassportModule } from 'green-controls/src/forms';
-
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MainModule } from './pages/main/main.module';
 
 const messageError: IMessageError = {
   required: 'required',
@@ -18,13 +18,11 @@ const messageError: IMessageError = {
   mask: 'mask',
   minlength: 'minlength',
   maxlength: 'maxlength',
-  notSelected: 'notSelected'
-}
+  notSelected: 'notSelected',
+};
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [ AppComponent ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -33,9 +31,10 @@ const messageError: IMessageError = {
     ReactiveFormsModule,
     MessageErrorModule.forRoot(messageError),
     MarkAsTouchedDirective,
-    GreenFormPassportModule
+    GreenFormPassportModule,
+    MainModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }

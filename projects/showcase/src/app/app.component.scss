@@ -1,34 +1,39 @@
 @import '../assets/color';
 
 .wrapper {
-  display: grid;
-  grid-template-rows: auto 1fr 60px;
-  gap: 20px;
   min-height: 100vh;
-  min-width: 100vw;
+  display: grid;
+  grid-template-rows: 100px 1fr 100px;
 
   .header {
     padding-left: 20px;
     background-color: $header;
-    width: 100%;
+    min-width: 0%;
     &__title {
       color: $white;
-      font-size: 32px;
+      font-size: min(8vw, 32px);
+      font-weight: 500;
+    }
+  }
+
+  .main {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    &__title {
+      margin: 10px 0;
+      font-size: min(7vw, 30px);
       font-weight: 500;
     }
   }
 
   .footer {
     background-color: $header;
-    width: 100%;
+    min-width: 0%;
     color: $white;
   }
 }
 
-.conteiner {
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-}

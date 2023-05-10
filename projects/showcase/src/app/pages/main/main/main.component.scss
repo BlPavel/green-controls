@@ -1,0 +1,8 @@
+.navigation {
+  margin: min(2vw, 50px) 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 3vw, 80px);
+  flex-wrap: wrap;
+}

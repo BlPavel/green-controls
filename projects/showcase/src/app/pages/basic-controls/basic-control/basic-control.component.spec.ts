@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainItemComponent } from './main-item.component';
+import { BasicControlComponent } from './basic-control.component';
 
-describe('MainItemComponent', () => {
-  let component: MainItemComponent;
-  let fixture: ComponentFixture<MainItemComponent>;
+describe('BasicControlComponent', () => {
+  let component: BasicControlComponent;
+  let fixture: ComponentFixture<BasicControlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainItemComponent ]
+      declarations: [ BasicControlComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MainItemComponent);
+    fixture = TestBed.createComponent(BasicControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

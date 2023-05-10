@@ -8,6 +8,8 @@ import { IDataDateInput } from 'green-controls/src/interfaces';
   styleUrls: [ './app.component.scss' ],
 })
 export class AppComponent implements OnInit {
+  public title: string = 'Title';
+
   public isShow: boolean = true;
 
   public form: FormGroup = new FormGroup({
