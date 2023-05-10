@@ -1,1 +1,22 @@
-<p>basic-control works!</p>
+<h4>Api</h4>
+<span>{{ api }}</span>
+<h4>Input parametrs</h4>
+<span></span>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>From interface</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parametr of inputParametrs">
+      <td>{{ parametr.name }}</td>
+      <td>{{ parametr.fromInterface }}</td>
+      <td>{{ parametr.description }}</td>
+    </tr>
+  </tbody>
+</table>
+<h4>Use components</h4>
+<div *ngFor="let component of useComponents">{{ component }}</div>

@@ -19,7 +19,7 @@ export class MainComponent {
   ];
 
   public links: string[] = [
-    'basic_controls',
+    '/basic_controls',
     'date_control',
     'field_Control',
     'auto_complite',

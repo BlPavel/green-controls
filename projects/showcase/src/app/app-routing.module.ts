@@ -5,6 +5,13 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then((m) => m.MainModule),
+    title: 'Main',
+    data: { title: 'Main' },
+  }, {
+    path: 'basic_controls',
+    loadChildren: () => import('./pages/basic-controls/basic-controls.module').then((m) => m.BasicControlsModule),
+    title: 'Basic controls',
+    data: { title: 'Basic controls' },
   }, {
     path: '',
     pathMatch: 'full',

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IDataDateInput } from 'green-controls/src/interfaces';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,35 +7,15 @@ import { IDataDateInput } from 'green-controls/src/interfaces';
   styleUrls: [ './app.component.scss' ],
 })
 export class AppComponent implements OnInit {
-  public title: string = 'Title';
+  public title: string = '';
 
-  public isShow: boolean = true;
-
-  public form: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    check: new FormControl(false),
-    passport: new FormControl(''),
-  });
-
-  public changeShow():void {
-    this.isShow = !this.isShow;
-  }
+  constructor(private readonly _router: Router, private readonly _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.form.get('check')?.valueChanges.subscribe((v) => {
-      if (v) {
-        this.form.get('name')?.disable();
-      } else {
-        this.form.get('name')?.enable();
+    this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.title = this._route.root.firstChild?.snapshot.data['title'];
       }
     });
-  }
-
-  public dataName: IDataDateInput = {
-    label: 'name',
-    validators: [ Validators.required, Validators.minLength(2) ],
-  };
-
-  public onSubmit():void {
   }
 }
