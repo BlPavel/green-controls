@@ -30,7 +30,7 @@ import {
   IRegistrationStreet,
 } from 'green-controls/src/interfaces';
 import {
-  Observable, Subject, first, takeUntil,
+  Observable, Subject, takeUntil,
 } from 'rxjs';
 
 @Component({
@@ -54,23 +54,23 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
   @Input()
   public dataAddress: IDataAddress<IRegistrationRegion, IRegistrationCity, IRegistrationStreet> = {
       region: {
-        displayFn: (region) => region.name,
+        displayFn: (region) => region.fullName,
         valuesAutoComplete: [],
-        valueOnDisplay: 'name',
+        valueOnDisplay: 'fullName',
         label: 'Регион',
         validators: [ Validators.required ],
       },
       city: {
-        displayFn: (city) => city.name,
+        displayFn: (city) => city.fullName,
         valuesAutoComplete: [],
-        valueOnDisplay: 'name',
+        valueOnDisplay: 'fullName',
         label: 'Город',
         validators: [ Validators.required ],
       },
       street: {
-        displayFn: (street) => street.name,
+        displayFn: (street) => street.fullName,
         valuesAutoComplete: [],
-        valueOnDisplay: 'name',
+        valueOnDisplay: 'fullName',
         label: 'Улица',
         validators: [ Validators.required ],
       },
@@ -208,7 +208,7 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
   public onChangeRegion(value: unknown): void {
     if (typeof value === 'string' && value) {
       this._daDataService.getRegion(value)
-        .pipe(first(), takeUntil(this._destroy$))
+        .pipe(takeUntil(this._destroy$))
         .subscribe((region) => {
           this.dataAddress.region.valuesAutoComplete = region;
           this.dataAddress.region = { ...this.dataAddress.region };
@@ -223,7 +223,7 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
     const regionName: string = this.form.get('region')?.value?.name;
     if (typeof value === 'string' && value && regionName) {
       this._daDataService.getCity(value, regionName)
-        .pipe(first(), takeUntil(this._destroy$))
+        .pipe(takeUntil(this._destroy$))
         .subscribe((city) => {
           this.dataAddress.city.valuesAutoComplete = city;
           this.dataAddress.city = { ...this.dataAddress.city };
@@ -239,7 +239,7 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
     const regionName: string = this.form.get('region')?.value?.name;
     if (typeof value === 'string' && value && regionName && cityName) {
       this._daDataService.getStreet(value, cityName, regionName, this.form.get('city')?.value?.isSettlement)
-        .pipe(first(), takeUntil(this._destroy$)).subscribe((street) => {
+        .pipe(takeUntil(this._destroy$)).subscribe((street) => {
           this.dataAddress.street.valuesAutoComplete = street;
           this.dataAddress.street = { ...this.dataAddress.street };
         });
