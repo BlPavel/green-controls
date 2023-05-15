@@ -43,7 +43,7 @@ export class FormAddressComponent {
 
   public changeRegion(value: unknown): void {
     if (typeof value === 'string' && value) {
-      this.dataAddrress.region.valuesAutoComplete = this.mockAddress;
+      this.dataAddrress.region.valuesAutoComplete = this.mockAddress.filter((mockAddress) => mockAddress.name.includes(value));
       this.dataAddrress = { ...this.dataAddrress };
     } else {
       this.dataAddrress.region.valuesAutoComplete = [];

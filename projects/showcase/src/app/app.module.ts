@@ -21,6 +21,9 @@ const messageError: IMessageError = {
   minlength: 'minlength',
   maxlength: 'maxlength',
   notSelected: 'notSelected',
+  matDatepickerMax: 'matDatepickerMax',
+  matDatepickerMin: 'matDatepickerMin',
+  matDatepickerParse: 'matDatepickerParse',
 };
 
 @NgModule({
