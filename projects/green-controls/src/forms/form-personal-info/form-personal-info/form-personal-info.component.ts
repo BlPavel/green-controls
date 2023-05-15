@@ -29,12 +29,10 @@ import { Observable, Subject, takeUntil } from 'rxjs';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => FormPersonalInfoComponent),
       multi: true,
     }, {
       provide: NG_VALIDATORS,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => FormPersonalInfoComponent),
       multi: true,
     },
@@ -83,7 +81,14 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
     private readonly _fb: NonNullableFormBuilder,
     private readonly _dateService: DateService,
     private readonly _cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+    this.form = this._fb.group<IPersonalInfoForm>({
+      surname: this._fb.control(''),
+      name: this._fb.control(''),
+      patronimyc: this._fb.control(''),
+      dateOfBirth: this._fb.control(''),
+    });
+  }
 
   public onChange: () => void = () => {};
 
@@ -121,13 +126,6 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
   }
 
   ngOnInit(): void {
-    this.form = this._fb.group<IPersonalInfoForm>({
-      surname: this._fb.control(''),
-      name: this._fb.control(''),
-      patronimyc: this._fb.control(''),
-      dateOfBirth: this._fb.control(''),
-    });
-
     if (this.isInRow) {
       this.form.addControl('isExistPatronymic', this._fb.control(false));
       this.dataPersonalInfo.patronimyc.validators?.push(Validators.required);

@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy, Component, Input, OnInit, forwardRef,
+  ChangeDetectionStrategy, Component, Input, forwardRef,
 } from '@angular/core';
 import { IDataContacts, IContactsForm } from 'green-controls/src/interfaces';
 import {
@@ -19,19 +19,17 @@ import {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => FormContactsComponent),
       multi: true,
     }, {
       provide: NG_VALIDATORS,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => FormContactsComponent),
       multi: true,
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormContactsComponent implements OnInit, ControlValueAccessor, Validator {
+export class FormContactsComponent implements ControlValueAccessor, Validator {
   @Input()
   public dataContacts: IDataContacts = {
       phone: {
@@ -57,7 +55,13 @@ export class FormContactsComponent implements OnInit, ControlValueAccessor, Vali
 
   public form: FormGroup = new FormGroup({});
 
-  constructor(private readonly _fb: NonNullableFormBuilder) {}
+  constructor(private readonly _fb: NonNullableFormBuilder) {
+    this.form = this._fb.group<IContactsForm>({
+      phone: this._fb.control(''),
+      email: this._fb.control(''),
+      repeatEmail: this._fb.control(''),
+    });
+  }
 
   public onChange: () => void = () => {};
 
@@ -90,13 +94,5 @@ export class FormContactsComponent implements OnInit, ControlValueAccessor, Vali
 
   validate(): ValidationErrors | null {
     return this.form.invalid ? { invalid: true } : null;
-  }
-
-  ngOnInit(): void {
-    this.form = this._fb.group<IContactsForm>({
-      phone: this._fb.control(''),
-      email: this._fb.control(''),
-      repeatEmail: this._fb.control(''),
-    });
   }
 }

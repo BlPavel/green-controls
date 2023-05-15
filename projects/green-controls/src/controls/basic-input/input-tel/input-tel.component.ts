@@ -14,12 +14,10 @@ import { MessageErrorService } from 'green-controls/src/services';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => InputTelComponent),
       multi: true,
     }, {
       provide: NG_VALIDATORS,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => InputTelComponent),
       multi: true,
     }, MessageErrorService,

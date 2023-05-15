@@ -15,12 +15,10 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => AutoCompliteComponent),
       multi: true,
     }, {
       provide: NG_VALIDATORS,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => AutoCompliteComponent),
       multi: true,
     }, MessageErrorService,

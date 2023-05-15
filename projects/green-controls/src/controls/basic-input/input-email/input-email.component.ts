@@ -15,12 +15,10 @@ import { GreenPattern, GreenValidators } from 'green-controls/src/classes';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => InputEmailComponent),
       multi: true,
     }, {
       provide: NG_VALIDATORS,
-      // eslint-disable-next-line no-use-before-define
       useExisting: forwardRef(() => InputEmailComponent),
       multi: true,
     }, MessageErrorService,
