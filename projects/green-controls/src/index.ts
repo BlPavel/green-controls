@@ -7,3 +7,4 @@ export * from 'green-controls/src/controls';
 export * from 'green-controls/src/forms';
 export * from 'green-controls/src/abstract';
 export * from 'green-controls/src/classes';
+export * from 'green-controls/src/pipes';
