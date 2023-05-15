@@ -2,12 +2,10 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
   SimpleChanges,
   forwardRef,
 } from '@angular/core';
@@ -21,30 +19,62 @@ import {
   Validator,
   Validators,
 } from '@angular/forms';
-import { IDataAddress, IDataAddressHouse, IAddressForm } from 'green-controls/src/interfaces';
+import { DaDataService } from 'green-controls/src/services';
 import { GreenPattern } from 'green-controls/src/classes';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import {
+  IAddressForm,
+  IDataAddress,
+  IDataAddressHouse,
+  IRegistrationCity,
+  IRegistrationRegion,
+  IRegistrationStreet,
+} from 'green-controls/src/interfaces';
+import {
+  Observable, Subject, first, takeUntil,
+} from 'rxjs';
 
 @Component({
-  selector: 'gr-form-address',
-  templateUrl: './form-address.component.html',
+  selector: 'gr-address-da-data',
+  templateUrl: './form-address-da-data.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormAddressComponent),
+      useExisting: forwardRef(() => FormAddressDaDataComponent),
       multi: true,
     }, {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => FormAddressComponent),
+      useExisting: forwardRef(() => FormAddressDaDataComponent),
       multi: true,
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormAddressComponent<TRegion, VCity, UStreet>
+export class FormAddressDaDataComponent
 implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
   @Input()
-  public dataAddress!: IDataAddress<TRegion, VCity, UStreet>;
+  public dataAddress: IDataAddress<IRegistrationRegion, IRegistrationCity, IRegistrationStreet> = {
+      region: {
+        displayFn: (region) => region.name,
+        valuesAutoComplete: [],
+        valueOnDisplay: 'name',
+        label: 'Регион',
+        validators: [ Validators.required ],
+      },
+      city: {
+        displayFn: (city) => city.name,
+        valuesAutoComplete: [],
+        valueOnDisplay: 'name',
+        label: 'Город',
+        validators: [ Validators.required ],
+      },
+      street: {
+        displayFn: (street) => street.name,
+        valuesAutoComplete: [],
+        valueOnDisplay: 'name',
+        label: 'Улица',
+        validators: [ Validators.required ],
+      },
+    };
 
   @Input()
   public addressHouse: IDataAddressHouse = {
@@ -72,18 +102,6 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
   @Input()
   public isRowStyle: boolean = true;
 
-  @Output()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public changeRegion: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public changeCity: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public changeStreet: EventEmitter<any> = new EventEmitter<any>();
-
   private _validatorsStreet: Validators[] = [];
 
   public form: FormGroup = new FormGroup({});
@@ -94,8 +112,12 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
 
   private _destroy$ = new Subject();
 
-  constructor(private readonly _fb: NonNullableFormBuilder, private readonly _cdr: ChangeDetectorRef) {
-    this.form = this._fb.group<IAddressForm<TRegion, VCity, UStreet>>({
+  constructor(
+    private readonly _fb: NonNullableFormBuilder,
+    private readonly _cdr: ChangeDetectorRef,
+    private readonly _daDataService: DaDataService,
+  ) {
+    this.form = this._fb.group<IAddressForm<IRegistrationRegion, IRegistrationCity, IRegistrationStreet>>({
       region: this._fb.control(''),
       city: this._fb.control(''),
       street: this._fb.control(''),
@@ -184,24 +206,50 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
   }
 
   public onChangeRegion(value: unknown): void {
-    if (typeof value === 'string') {
-      this.changeRegion.emit(value);
+    if (typeof value === 'string' && value) {
+      this._daDataService.getRegion(value)
+        .pipe(first(), takeUntil(this._destroy$))
+        .subscribe((region) => {
+          this.dataAddress.region.valuesAutoComplete = region;
+          this.dataAddress.region = { ...this.dataAddress.region };
+        });
+    } else {
+      this.dataAddress.region.valuesAutoComplete = [];
+      this.dataAddress.region = { ...this.dataAddress.region };
     }
   }
 
   public onChangeCity(value: unknown): void {
-    if (typeof value === 'string') {
-      this.changeCity.emit(value);
+    const regionName: string = this.form.get('region')?.value?.name;
+    if (typeof value === 'string' && value && regionName) {
+      this._daDataService.getCity(value, regionName)
+        .pipe(first(), takeUntil(this._destroy$))
+        .subscribe((city) => {
+          this.dataAddress.city.valuesAutoComplete = city;
+          this.dataAddress.city = { ...this.dataAddress.city };
+        });
+    } else {
+      this.dataAddress.city.valuesAutoComplete = [];
+      this.dataAddress.city = { ...this.dataAddress.city };
     }
   }
 
   public onChangeStreet(value: unknown): void {
-    if (typeof value === 'string') {
-      this.changeStreet.emit(value);
+    const cityName: string = this.form.get('city')?.value?.name;
+    const regionName: string = this.form.get('region')?.value?.name;
+    if (typeof value === 'string' && value && regionName && cityName) {
+      this._daDataService.getStreet(value, cityName, regionName, this.form.get('city')?.value?.isSettlement)
+        .pipe(first(), takeUntil(this._destroy$)).subscribe((street) => {
+          this.dataAddress.street.valuesAutoComplete = street;
+          this.dataAddress.street = { ...this.dataAddress.street };
+        });
+    } else {
+      this.dataAddress.street.valuesAutoComplete = [];
+      this.dataAddress.street = { ...this.dataAddress.street };
     }
   }
 
-  public onSelectedRegion(value: TRegion): void {
+  public onSelectedRegion(value: IRegistrationRegion): void {
     if (this.dataAddress?.region?.valueOnDisplay) {
       const nameRegion: string = value[this.dataAddress?.region?.valueOnDisplay] as string;
       if (nameRegion !== this._regionValue) {
@@ -214,7 +262,7 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
     this.dataAddress.region = { ...this.dataAddress.region };
   }
 
-  public onSelectedCity(value: VCity): void {
+  public onSelectedCity(value: IRegistrationCity): void {
     if (this.dataAddress?.city?.valueOnDisplay) {
       const nameCity: string = value[this.dataAddress?.city?.valueOnDisplay] as string;
       if (nameCity !== this._cityValue) {

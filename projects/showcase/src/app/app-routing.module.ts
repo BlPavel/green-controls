@@ -7,12 +7,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/main/main.module').then((m) => m.MainModule),
     title: 'Main',
     data: { title: 'Main' },
-  }, {
+  },
+  {
     path: 'basic_controls',
     loadChildren: () => import('./pages/basic-controls/basic-controls.module').then((m) => m.BasicControlsModule),
     title: 'Basic controls',
     data: { title: 'Basic controls' },
-  }, {
+  },
+  {
+    path: 'form_address',
+    loadChildren: () => import('./pages/form-address/form-address.module').then((m) => m.FormAddressModule),
+    title: 'Form address',
+    data: { title: 'Form address' },
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'main',

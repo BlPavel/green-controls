@@ -1,0 +1,9 @@
+<form action="" [formGroup]="form" grMarkAsTouched>
+  <gr-form-address
+    formControlName="address"
+    [dataAddress]="dataAddrress"
+    (changeRegion)="changeRegion($event)"
+    (changeCity)="changeCity($event)"
+    (changeStreet)="changeStreet($event)"
+  ></gr-form-address>
+</form>

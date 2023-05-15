@@ -42,7 +42,8 @@
         "no-empty-function": "off",
         "no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
         "no-undef": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-use-before-define": "off"
       },
       "plugins": ["import"]
     },

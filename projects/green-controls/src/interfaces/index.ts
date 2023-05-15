@@ -13,3 +13,5 @@ export * from './contacts-form';
 export * from './passport-form';
 export * from './personal-info-form';
 export * from './date-service';
+export * from './address-da-data';
+export * from './responce';

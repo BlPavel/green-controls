@@ -20,13 +20,13 @@ export class MainComponent {
 
   public links: string[] = [
     '/basic_controls',
-    'date_control',
-    'field_Control',
-    'auto_complite',
-    'form_address',
-    'form_contacts',
-    'form_passport',
-    'form_personal_info',
-    'message_error',
+    '/date_control',
+    '/field_Control',
+    '/auto_complite',
+    '/form_address',
+    '/form_contacts',
+    '/form_passport',
+    '/form_personal_info',
+    '/message_error',
   ];
 }
