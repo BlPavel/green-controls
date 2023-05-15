@@ -2,4 +2,4 @@ export * from './form-address';
 export * from './form-contacts';
 export * from './form-passport';
 export * from './form-personal-info';
-export * from './address-da-data';
+export * from './form-address-da-data';
