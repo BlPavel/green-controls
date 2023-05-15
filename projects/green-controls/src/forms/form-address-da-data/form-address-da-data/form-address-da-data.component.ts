@@ -211,12 +211,13 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
         .pipe(first(), takeUntil(this._destroy$))
         .subscribe((region) => {
           this.dataAddress.region.valuesAutoComplete = region;
+          this.dataAddress.region = { ...this.dataAddress.region };
+          this._cdr.markForCheck();
         });
     } else {
       this.dataAddress.region.valuesAutoComplete = [];
+      this.dataAddress.region = { ...this.dataAddress.region };
     }
-    this.dataAddress.region = { ...this.dataAddress.region };
-    this._cdr.detectChanges();
   }
 
   public onChangeCity(value: unknown): void {
@@ -226,12 +227,13 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
         .pipe(first(), takeUntil(this._destroy$))
         .subscribe((city) => {
           this.dataAddress.city.valuesAutoComplete = city;
+          this.dataAddress.city = { ...this.dataAddress.city };
+          this._cdr.markForCheck();
         });
     } else {
       this.dataAddress.city.valuesAutoComplete = [];
+      this.dataAddress.city = { ...this.dataAddress.city };
     }
-    this.dataAddress.city = { ...this.dataAddress.city };
-    this._cdr.detectChanges();
   }
 
   public onChangeStreet(value: unknown): void {
@@ -241,12 +243,13 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
       this._daDataService.getStreet(value, cityName, regionName, this.form.get('city')?.value?.isSettlement)
         .pipe(first(), takeUntil(this._destroy$)).subscribe((street) => {
           this.dataAddress.street.valuesAutoComplete = street;
+          this.dataAddress.street = { ...this.dataAddress.street };
+          this._cdr.markForCheck();
         });
     } else {
       this.dataAddress.street.valuesAutoComplete = [];
+      this.dataAddress.street = { ...this.dataAddress.street };
     }
-    this.dataAddress.street = { ...this.dataAddress.street };
-    this._cdr.detectChanges();
   }
 
   public onSelectedRegion(value: IRegistrationRegion): void {
