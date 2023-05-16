@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -42,7 +43,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormAddressComponent<TRegion, VCity, UStreet>
-implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
+implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor, Validator {
   @Input()
   public dataAddress!: IDataAddress<TRegion, VCity, UStreet>;
 
@@ -164,7 +165,9 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
     if (this.dataAddress.street.validators) {
       this._validatorsStreet = this.dataAddress.street.validators;
     }
+  }
 
+  ngAfterContentInit(): void {
     if (!this.withOutStreet$) {
       this.form.get('withoutStreet')?.valueChanges.pipe(takeUntil(this._destroy$)).subscribe((withOutStreet) => {
         if (withOutStreet) {
