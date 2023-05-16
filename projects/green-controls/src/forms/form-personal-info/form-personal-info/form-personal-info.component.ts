@@ -148,7 +148,7 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
         } else {
           this._enablePatronomic();
         }
-        this._cdr.detectChanges();
+        this._cdr.markForCheck();
       });
     }
 
@@ -159,7 +159,7 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
         } else {
           this._enablePatronomic();
         }
-        this._cdr.detectChanges();
+        this._cdr.markForCheck();
       });
     }
   }

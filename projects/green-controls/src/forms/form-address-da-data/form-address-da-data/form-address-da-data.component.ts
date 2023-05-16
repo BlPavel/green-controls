@@ -194,7 +194,7 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
         } else {
           this._enableStreet();
         }
-        this._cdr.detectChanges();
+        this._cdr.markForCheck();
       });
     }
 
@@ -204,6 +204,7 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
       } else {
         this._enableStreet();
       }
+      this._cdr.markForCheck();
     });
   }
 
