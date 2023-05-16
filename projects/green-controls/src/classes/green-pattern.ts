@@ -13,7 +13,7 @@ export class GreenPattern {
 
   public static namePerson = '^[А-ЯЁ][А-Яа-яЁё\'-\\s]{0,}$';
 
-  public static issuedCodeValidationPattern = '^[0-9-]{7,7}$';
+  public static issuedCodeValidationPattern = '^[0-9-]{6,6}$';
 
   public static houseValidationPattern = '^[0-9а-яА-Я.,-/]{0,}$';
 }

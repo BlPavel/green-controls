@@ -21,6 +21,12 @@ const routes: Routes = [
     data: { title: 'Form address' },
   },
   {
+    path: 'form_passport',
+    loadChildren: () => import('./pages/form-passport/form-passport.module').then((m) => m.FormPassportModule),
+    title: 'Form passport',
+    data: { title: 'Form passport' },
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'main',
