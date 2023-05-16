@@ -29,7 +29,9 @@
         (onSelectedChange)="onSelectedStreet()"
       ></gr-auto-complite>
       <div class="sbi-form__block__col_4 ms-md-15">
-        <mat-checkbox color="primary" class="checkbox" formControlName="withoutStreet"> {{ labelWithOutStreet }} </mat-checkbox>
+        <mat-checkbox color="primary" class="checkbox" formControlName="withoutStreet">
+          {{ labelWithOutStreet }}
+        </mat-checkbox>
       </div>
     </div>
   </ng-container>
@@ -45,14 +47,27 @@
       ></gr-auto-complite>
     </div>
     <div class="sbi-form__block__row">
-      <mat-checkbox class="sbi-form__block__col_4" color="primary" class="checkbox" formControlName="withoutStreet"> {{ labelWithOutStreet }} </mat-checkbox>
+      <mat-checkbox
+        class="sbi-form__block__col_4"
+        color="primary"
+        class="checkbox"
+        formControlName="withoutStreet"
+      >
+        {{ labelWithOutStreet }}
+      </mat-checkbox>
     </div>
   </ng-container>
 
-
   <div class="sbi-form__block__row">
-    <gr-input-text class="sbi-form__block__col_8 me-md-15" formControlName="house" [dataInput]="addressHouse.house"></gr-input-text>
-    <gr-input-text class="sbi-form__block__col_4 ms-md-15" formControlName="flat" [dataInput]="addressHouse.flat"></gr-input-text>
+    <gr-input-text
+      class="sbi-form__block__col_8 me-md-15"
+      formControlName="house"
+      [dataInput]="addressHouse.house"
+    ></gr-input-text>
+    <gr-input-text
+      class="sbi-form__block__col_4 ms-md-15"
+      formControlName="flat"
+      [dataInput]="addressHouse.flat"
+    ></gr-input-text>
   </div>
 </form>
-

@@ -161,25 +161,23 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
   }
 
   protected setValidators(): void {
-    if (this.validators?.length === 0) {
-      this.control.clearValidators();
-    }
+    this.control.clearValidators();
     if (this.validators && this.validators.length > 0) {
       this.validators.forEach((item) => {
         this.control.addValidators(item as ValidatorFn);
       });
     }
+    this.control.updateValueAndValidity();
   }
 
   protected setAsyncValidators(): void {
-    if (this.asyncValidators?.length === 0) {
-      this.control.clearAsyncValidators();
-    }
+    this.control.clearAsyncValidators();
     if (this.asyncValidators && this.asyncValidators.length > 0) {
       this.asyncValidators.forEach((item) => {
         this.control.addAsyncValidators(item as AsyncValidatorFn);
       });
     }
+    this.control.updateValueAndValidity();
   }
 
   ngOnDestroy(): void {

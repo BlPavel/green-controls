@@ -5,5 +5,7 @@
     (changeRegion)="changeRegion($event)"
     (changeCity)="changeCity($event)"
     (changeStreet)="changeStreet($event)"
+    [isRequiredFlat]="isRequiredFlat"
   ></gr-form-address>
+  <input type="checkbox" formControlName="check" />
 </form>

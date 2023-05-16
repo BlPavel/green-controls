@@ -130,9 +130,11 @@ implements OnChanges, OnInit, OnDestroy, ControlValueAccessor, Validator {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isRequiredFlat'] !== undefined) {
       if (changes['isRequiredFlat'].currentValue) {
-        this.addressHouse.flat.validators?.push(Validators.required);
+        this.addressHouse.flat.validators = [ Validators.required, Validators.pattern(GreenPattern.houseValidationPattern) ];
+        this.addressHouse.flat = { ...this.addressHouse.flat };
       } else {
-        this.addressHouse.flat.validators?.filter((validator) => validator !== Validators.required);
+        this.addressHouse.flat.validators = [ Validators.pattern(GreenPattern.houseValidationPattern) ];
+        this.addressHouse.flat = { ...this.addressHouse.flat };
       }
     }
     if (changes['dataAddress']) {
