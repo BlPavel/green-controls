@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormControl, FormGroup, ValidatorFn, Validators,
+} from '@angular/forms';
+import { IDataInput } from 'green-controls/src/interfaces';
 
 interface IInputParametrs {
   name: string,
@@ -11,7 +15,16 @@ interface IInputParametrs {
   templateUrl: './basic-control.component.html',
   styleUrls: [ './basic-control.component.scss' ],
 })
-export class BasicControlComponent {
+export class BasicControlComponent implements OnInit {
+  public form: FormGroup = new FormGroup({
+    inputText: new FormControl(''),
+  });
+
+  public dataInputText: IDataInput = {
+    label: 'InputText',
+    validators: [ Validators.required ],
+  };
+
   public api: string = 'import { GreenBasicInputModule } from \'green-controls\'';
 
   public inputParametrs: IInputParametrs[] = [
@@ -69,4 +82,29 @@ export class BasicControlComponent {
     '<gr-input-tel></gr-input-tel>',
     '<gr-input-text></gr-input-text>',
   ];
+
+  public hasError: boolean = false;
+
+  valid(bool: boolean): ValidatorFn {
+    return (): { [key: string]: boolean } | null => {
+      if (!bool) {
+        return null;
+      }
+      return { pattern: true };
+    };
+  }
+
+  setError() {
+    if (this.hasError) {
+      this.dataInputText.validators = [ Validators.required, this.valid(false) ];
+      this.dataInputText = { ...this.dataInputText };
+    } else {
+      this.dataInputText.validators = [ Validators.required, this.valid(true) ];
+      this.dataInputText = { ...this.dataInputText };
+    }
+    this.hasError = !this.hasError;
+  }
+
+  ngOnInit(): void {
+  }
 }

@@ -26,6 +26,9 @@ export class SetErrorMessageDirective implements OnChanges, OnInit, OnDestroy {
   @Input()
   public isTouchedDateToggle: boolean = false;
 
+  @Input()
+  public validators: Validators[] = [];
+
   private _form: FormGroup = new FormGroup({});
 
   private _subscribe?: Subscription | null = null;
@@ -50,6 +53,9 @@ export class SetErrorMessageDirective implements OnChanges, OnInit, OnDestroy {
       this.chooseError();
     }
     if (changes['isTouchedDateToggle']) {
+      this.chooseError();
+    }
+    if (changes['validators']) {
       this.chooseError();
     }
   }

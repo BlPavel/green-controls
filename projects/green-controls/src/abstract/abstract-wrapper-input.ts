@@ -43,7 +43,7 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
 
   protected subscribe?: Subscription;
 
-  protected validators?: Validators[];
+  protected validators: Validators[] = [];
 
   protected asyncValidators?: AsyncValidatorFn[];
 
