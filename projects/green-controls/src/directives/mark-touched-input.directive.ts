@@ -55,12 +55,14 @@ export class MarkTouchedInputDirective implements OnInit, AfterViewInit, OnDestr
   }
 
   ngAfterViewInit(): void {
-    const form: HTMLElement = this._markAsTouchedDirective.element.nativeElement;
-    Promise.resolve().then(() => {
-      if (form.classList.contains('ng-submitted')) {
-        this._markAsTouched();
-      }
-    });
+    if (this._markAsTouchedDirective) {
+      const form: HTMLElement = this._markAsTouchedDirective.element.nativeElement;
+      Promise.resolve().then(() => {
+        if (form.classList.contains('ng-submitted')) {
+          this._markAsTouched();
+        }
+      });
+    }
   }
 
   ngOnDestroy(): void {

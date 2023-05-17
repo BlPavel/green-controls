@@ -21,7 +21,7 @@
 <h4>Use components</h4>
 <div *ngFor="let component of useComponents">{{ component }}</div>
 
-<form action="" [formGroup]="form" grMarkAsTouched>
+<form action="" [formGroup]="form">
   <gr-input-text formControlName="inputText" [dataInput]="dataInputText"></gr-input-text>
   <button type="button" (click)="setError()">click</button>
 </form>
