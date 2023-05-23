@@ -60,6 +60,9 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
         valueOnDisplay: 'fullName',
         label: 'Регион',
         validators: [ Validators.required ],
+        customErrorMessage: {
+          notSelected: 'Выберите населённый пункт из списка',
+        },
       },
       city: {
         displayFn: (city) => city.fullName,
@@ -67,6 +70,9 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
         valueOnDisplay: 'fullName',
         label: 'Город',
         validators: [ Validators.required ],
+        customErrorMessage: {
+          notSelected: 'Выберите населённый пункт из списка',
+        },
       },
       street: {
         displayFn: (street) => street.fullName,
@@ -74,6 +80,9 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
         valueOnDisplay: 'fullName',
         label: 'Улица',
         validators: [ Validators.required ],
+        customErrorMessage: {
+          notSelected: 'Выберите улицу из списка',
+        },
       },
     };
 

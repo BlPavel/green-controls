@@ -1,3 +1,12 @@
 <form [formGroup]="form">
-  <gr-form-passport formControlName="passport" [hasIssue]="true"></gr-form-passport>
+  <gr-form-passport
+    formControlName="passport"
+    [hasIssue]="true"
+    [dateBirtday]="dateBirthday"
+  ></gr-form-passport>
+  <gr-input-date
+    formControlName="date"
+    [dataDateInput]="dataDate"
+    (changeValue)="changeDate($event)"
+  ></gr-input-date>
 </form>

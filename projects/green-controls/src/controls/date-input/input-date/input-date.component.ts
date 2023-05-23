@@ -1,9 +1,16 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges, forwardRef,
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  forwardRef,
 } from '@angular/core';
 import {
   NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validators,
 } from '@angular/forms';
+import { GreenValidators } from 'green-controls/src/classes';
 import { AbstractWrapperInput } from 'green-controls/src/abstract';
 import { IDataDateInput } from 'green-controls/src/interfaces';
 import { MessageErrorService } from 'green-controls/src/services';
@@ -28,9 +35,9 @@ export class InputDateComponent extends AbstractWrapperInput implements OnChange
   @Input()
   public dataDateInput!: IDataDateInput;
 
-  public minDate?: string;
+  public minDate: string = '';
 
-  public maxDate?: string;
+  public maxDate: string = '';
 
   public isTouchedDateToggle: boolean = false;
 
@@ -70,11 +77,13 @@ export class InputDateComponent extends AbstractWrapperInput implements OnChange
       if (changes['dataDateInput'].currentValue?.validators) {
         this.validators = changes['dataDateInput'].currentValue?.validators;
         this.setValidators();
+        this._setDateValidators();
       }
       if (changes['dataDateInput'].currentValue?.asyncValidators) {
         this.asyncValidators = changes['dataDateInput'].currentValue?.asyncValidators;
         this.setAsyncValidators();
       }
+      this.control.updateValueAndValidity();
     }
   }
 
@@ -88,5 +97,10 @@ export class InputDateComponent extends AbstractWrapperInput implements OnChange
 
   public onClick(): void {
     this.isTouchedDateToggle = true;
+  }
+
+  private _setDateValidators(): void {
+    this.control.addValidators(GreenValidators.matDatepickerMax(this.maxDate ?? ''));
+    this.control.addValidators(GreenValidators.matDatepickerMin(this.minDate ?? ''));
   }
 }

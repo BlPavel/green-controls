@@ -1,4 +1,5 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { DateTime } from 'luxon';
 
 export class GreenValidators {
   public static greenEmail(control: AbstractControl): { [key: string]: boolean } | null {
@@ -18,5 +19,37 @@ export class GreenValidators {
       return { email: true };
     }
     return null;
+  }
+
+  public static matDatepickerMax(maxDate: string): ValidatorFn {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    return (control: AbstractControl): { [key: string]: {} } | null => {
+      const { value } = control;
+      if (value && value.toString() !== 'Invalid Date') {
+        const dateValue = new Date(value.toString());
+        const dateLimit = new Date(maxDate);
+        const diff = dateLimit.getTime() - dateValue.getTime();
+        if (diff > 0) {
+          return null;
+        }
+      }
+      return { matDatepickerMax: { actual: value, max: DateTime.fromISO(maxDate) } };
+    };
+  }
+
+  public static matDatepickerMin(minDate: string): ValidatorFn {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    return (control: AbstractControl): { [key: string]: {} } | null => {
+      const { value } = control;
+      if (value && value.toString() !== 'Invalid Date') {
+        const dateValue = new Date(value.toString());
+        const dateLimit = new Date(minDate);
+        const diff = dateLimit.getTime() - dateValue.getTime();
+        if (diff <= 85_399_999) {
+          return null;
+        }
+      }
+      return { matDatepickerMin: { actual: control.value, min: DateTime.fromISO(minDate) } };
+    };
   }
 }

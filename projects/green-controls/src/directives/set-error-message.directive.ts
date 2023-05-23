@@ -29,6 +29,12 @@ export class SetErrorMessageDirective implements OnChanges, OnInit, OnDestroy {
   @Input()
   public validators: Validators[] = [];
 
+  @Input()
+  public maxDate: string = '';
+
+  @Input()
+  public minDate: string = '';
+
   private _form: FormGroup = new FormGroup({});
 
   private _subscribe?: Subscription | null = null;
@@ -58,6 +64,14 @@ export class SetErrorMessageDirective implements OnChanges, OnInit, OnDestroy {
     if (changes['validators']) {
       this.chooseError();
     }
+    if (changes['maxDate']) {
+      this._control.control?.updateValueAndValidity();
+      this.chooseError();
+    }
+    if (changes['minDate']) {
+      this._control.control?.updateValueAndValidity();
+      this.chooseError();
+    }
   }
 
   ngOnInit(): void {
@@ -81,7 +95,6 @@ export class SetErrorMessageDirective implements OnChanges, OnInit, OnDestroy {
 
   public chooseError(): void {
     let error: ValidationErrors | null = this._control?.errors;
-
     if (this._control?.errors?.['matDatepickerParse']) {
       error = { matDatepickerParse: 'text' };
     } else if (this._control.control?.hasValidator(Validators.required) && !this._control.control.value) {

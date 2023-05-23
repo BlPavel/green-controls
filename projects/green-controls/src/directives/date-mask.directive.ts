@@ -29,6 +29,7 @@ export class DateMaskDirective {
       input.value = `${value[0]}_.__.____`;
       input.setSelectionRange(1, 1);
       this._previousLength = value.length;
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 2) {
@@ -41,12 +42,14 @@ export class DateMaskDirective {
         input.setSelectionRange(2, 2);
       }
       this._previousLength = value.length;
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 3) {
       input.value = `${value[0]}${value[1]}.${value[2]}_.____`;
       this._previousLength = value.length;
       input.setSelectionRange(4, 4);
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 4) {
@@ -59,6 +62,7 @@ export class DateMaskDirective {
         input.setSelectionRange(5, 5);
       }
       this._previousLength = value.length;
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 5) {
@@ -69,6 +73,7 @@ export class DateMaskDirective {
       } else {
         input.setSelectionRange(selectionStart, selectionStart);
       }
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 6) {
@@ -79,6 +84,7 @@ export class DateMaskDirective {
       } else {
         input.setSelectionRange(selectionStart, selectionStart);
       }
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 7) {
@@ -90,6 +96,7 @@ export class DateMaskDirective {
       } else {
         input.setSelectionRange(selectionStart, selectionStart);
       }
+      this._control.control?.setErrors({ matDatepickerParse: true });
     }
 
     if (value.length === 8) {

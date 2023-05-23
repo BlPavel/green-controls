@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GreenFormPassportModule } from 'green-controls/src/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { GreenDateInputModule } from 'green-controls/src/controls';
 import { FormPassportComponent } from './form-passport/form-passport.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     GreenFormPassportModule,
     RouterModule.forChild(routes),
+    GreenDateInputModule,
   ],
 })
 export class FormPassportModule { }

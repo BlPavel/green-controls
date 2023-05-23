@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, forwardRef,
+  AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, forwardRef,
 } from '@angular/core';
 import {
   FormGroup, FormGroupDirective, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validators,
@@ -30,6 +30,16 @@ export class InputEmailComponent extends AbstractWrapperInput implements AfterCo
   public dataInput!: IDataInput;
 
   public form: FormGroup = new FormGroup({});
+
+  @HostListener('keydown', [ '$event' ])
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.ctrlKey && event.key === 'v') {
+      event.preventDefault();
+    }
+    if (event.ctrlKey && event.key === 'c') {
+      event.preventDefault();
+    }
+  }
 
   constructor(
     private readonly _messageErrorSevice: MessageErrorService,

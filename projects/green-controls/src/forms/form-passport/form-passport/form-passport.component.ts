@@ -20,6 +20,7 @@ import {
 import { IDataPassport, IPassportForm } from 'green-controls/src/interfaces';
 import { GreenPattern } from 'green-controls/src/classes';
 import { DateService } from 'green-controls/src/services';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'gr-form-passport',
@@ -40,10 +41,10 @@ import { DateService } from 'green-controls/src/services';
 })
 export class FormPassportComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
   @Input()
-    dateBirtday: string | null = '1900-01-01';
+  public dateBirtday: DateTime | string = '';
 
   @Input()
-    hasIssue: boolean = false;
+  public hasIssue: boolean = false;
 
   @Input()
   public dataPassportInfo: IDataPassport = {
@@ -96,7 +97,7 @@ export class FormPassportComponent implements OnChanges, OnInit, ControlValueAcc
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['dateBirtday']) {
-      const minDate = this._dateService.calcMinDateOfIssue(this.dateBirtday?.toString() ?? '1900-01-01');
+      const minDate = this._dateService.calcMinDateOfIssue(this.dateBirtday?.toString() ?? '');
       this.dataPassportInfo.dateOfIssue.minDate = minDate;
       this.dataPassportInfo.dateOfIssue = { ...this.dataPassportInfo.dateOfIssue };
     }
@@ -145,12 +146,12 @@ export class FormPassportComponent implements OnChanges, OnInit, ControlValueAcc
   }
 
   ngOnInit(): void {
-    if (!this.dataPassportInfo.dateOfIssue.minDate) {
-      const minDate = this._dateService.calcMinDateOfIssue(this.dateBirtday?.toString() ?? '1900-01-01');
+    if (!this.dataPassportInfo?.dateOfIssue?.minDate) {
+      const minDate = this._dateService.calcMinDateOfIssue(this.dateBirtday?.toString() ?? '');
       this.dataPassportInfo.dateOfIssue.minDate = minDate;
     }
 
-    if (!this.dataPassportInfo.dateOfIssue.maxDate) {
+    if (!this.dataPassportInfo?.dateOfIssue?.maxDate) {
       this.dataPassportInfo.dateOfIssue.maxDate = this._dateService.calcMaxDateOfIssue();
     }
   }
