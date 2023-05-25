@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit, AfterViewInit, ChangeDetectorRef,
+} from '@angular/core';
 import { IDataAddress } from 'green-controls/src/interfaces';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IMockAddress } from './interface/mock-address.interface';
@@ -10,7 +12,7 @@ import { dataAddressHouseHome, dataAddressHouseReg } from './const/house.const';
   templateUrl: './form-address.component.html',
   styleUrls: [ './form-address.component.scss' ],
 })
-export class FormAddressComponent implements OnInit {
+export class FormAddressComponent implements OnInit, AfterViewInit {
   public form!: FormGroup;
 
   public mockAddress: IMockAddress[] = MockAddress;
@@ -25,7 +27,7 @@ export class FormAddressComponent implements OnInit {
 
   public dataHouse = dataAddressHouseHome;
 
-  constructor(private readonly _fb: FormBuilder) {
+  constructor(private readonly _fb: FormBuilder, private readonly _cdr: ChangeDetectorRef) {
     this.form = this._fb.group({
       address: this._fb.control(''),
       check: this._fb.control(true),
@@ -34,7 +36,7 @@ export class FormAddressComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.isRequiredFlat = this.form.get('check')?.value;
 
     this.form.get('check')?.valueChanges.subscribe((v) => {
@@ -46,6 +48,12 @@ export class FormAddressComponent implements OnInit {
     this.form.get('check2')?.valueChanges.subscribe((v) => {
       this.isRequiredFlat2 = v;
     });
+
+    this._cdr.detectChanges();
+  }
+
+  ngOnInit(): void {
+    this._cdr.detectChanges();
   }
 
   public dataAddrress: IDataAddress<IMockAddress, IMockAddress, IMockAddress > = {

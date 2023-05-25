@@ -1,5 +1,13 @@
 <form action="" [formGroup]="form" grMarkAsTouched>
   <button type="button" (click)="hide()">Hide</button>
+  <div>
+    <input type="checkbox" formControlName="check" />
+    <span>Control 1</span>
+  </div>
+  <div>
+    <input type="checkbox" formControlName="check2" />
+    <span>Control 2</span>
+  </div>
   <ng-container *ngIf="isShow">
     <h1>Control1</h1>
     <gr-form-address
@@ -11,7 +19,7 @@
       [isRequiredFlat]="isRequiredFlat"
       [addressHouse]="dataReg"
     ></gr-form-address>
-
+    <!--
     <h1>Control2</h1>
     <gr-form-address
       formControlName="address2"
@@ -21,14 +29,6 @@
       (changeStreet)="changeStreet($event)"
       [isRequiredFlat]="isRequiredFlat2"
       [addressHouse]="dataHouse"
-    ></gr-form-address>
-    <div>
-      <input type="checkbox" formControlName="check" />
-      <span>Control 1</span>
-    </div>
-    <div>
-      <input type="checkbox" formControlName="check2" />
-      <span>Control 2</span>
-    </div>
+    ></gr-form-address> -->
   </ng-container>
 </form>

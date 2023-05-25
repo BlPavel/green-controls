@@ -104,7 +104,7 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
   public withOutStreet$?: Observable<boolean>;
 
   @Input()
-  public isRequiredFlat: boolean = false;
+  public isRequiredFlat?: boolean;
 
   @Input()
   public labelWithOutStreet: string = 'Улица отсутствует';
@@ -206,6 +206,9 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
 
     if (this.isRequiredFlat) {
       this.addressHouse.flat.validators = [ Validators.required, ...this._validatorsFlat ];
+      this.addressHouse.flat = { ...this.addressHouse.flat };
+    } else {
+      this.addressHouse.flat.validators = [ ...this._validatorsFlat ];
       this.addressHouse.flat = { ...this.addressHouse.flat };
     }
   }
