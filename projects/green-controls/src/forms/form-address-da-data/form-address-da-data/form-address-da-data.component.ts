@@ -200,7 +200,8 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
     }
 
     if (this.addressHouse.flat.validators) {
-      this._validatorsFlat = this.addressHouse.flat.validators;
+      this._validatorsFlat = this.addressHouse.flat.validators
+        .filter((validator) => validator !== Validators.required);
     }
 
     if (this.isRequiredFlat) {
