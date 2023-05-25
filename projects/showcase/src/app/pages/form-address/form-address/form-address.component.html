@@ -1,11 +1,34 @@
 <form action="" [formGroup]="form" grMarkAsTouched>
-  <gr-form-address
-    formControlName="address"
-    [dataAddress]="dataAddrress"
-    (changeRegion)="changeRegion($event)"
-    (changeCity)="changeCity($event)"
-    (changeStreet)="changeStreet($event)"
-    [isRequiredFlat]="isRequiredFlat"
-  ></gr-form-address>
-  <input type="checkbox" formControlName="check" />
+  <button type="button" (click)="hide()">Hide</button>
+  <ng-container *ngIf="isShow">
+    <h1>Control1</h1>
+    <gr-form-address
+      formControlName="address"
+      [dataAddress]="dataAddrress"
+      (changeRegion)="changeRegion($event)"
+      (changeCity)="changeCity($event)"
+      (changeStreet)="changeStreet($event)"
+      [isRequiredFlat]="isRequiredFlat"
+      [addressHouse]="dataReg"
+    ></gr-form-address>
+
+    <h1>Control2</h1>
+    <gr-form-address
+      formControlName="address2"
+      [dataAddress]="dataAddrress"
+      (changeRegion)="changeRegion($event)"
+      (changeCity)="changeCity($event)"
+      (changeStreet)="changeStreet($event)"
+      [isRequiredFlat]="isRequiredFlat2"
+      [addressHouse]="dataHouse"
+    ></gr-form-address>
+    <div>
+      <input type="checkbox" formControlName="check" />
+      <span>Control 1</span>
+    </div>
+    <div>
+      <input type="checkbox" formControlName="check2" />
+      <span>Control 2</span>
+    </div>
+  </ng-container>
 </form>

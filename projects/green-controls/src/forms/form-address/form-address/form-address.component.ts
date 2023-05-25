@@ -85,9 +85,11 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public changeStreet: EventEmitter<any> = new EventEmitter<any>();
 
+  public form: FormGroup = new FormGroup({});
+
   private _validatorsStreet: Validators[] = [];
 
-  public form: FormGroup = new FormGroup({});
+  private _validatorsFlat: Validators[] = [];
 
   private _regionValue: string = '';
 
@@ -107,12 +109,12 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isRequiredFlat'] !== undefined) {
+    if (changes['isRequiredFlat'] !== undefined && !changes['isRequiredFlat'].firstChange) {
       if (changes['isRequiredFlat'].currentValue) {
-        this.addressHouse.flat.validators = [ Validators.required, Validators.pattern(GreenPattern.houseValidationPattern) ];
+        this.addressHouse.flat.validators = [ Validators.required, ...this._validatorsFlat ];
         this.addressHouse.flat = { ...this.addressHouse.flat };
       } else {
-        this.addressHouse.flat.validators = [ Validators.pattern(GreenPattern.houseValidationPattern) ];
+        this.addressHouse.flat.validators = [ ...this._validatorsFlat ];
         this.addressHouse.flat = { ...this.addressHouse.flat };
       }
     }
@@ -164,6 +166,16 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
   ngOnInit(): void {
     if (this.dataAddress.street.validators) {
       this._validatorsStreet = this.dataAddress.street.validators;
+    }
+
+    if (this.addressHouse.flat.validators) {
+      this._validatorsFlat = this.addressHouse.flat.validators
+        .filter((validator) => validator !== Validators.required);
+    }
+
+    if (this.isRequiredFlat) {
+      this.addressHouse.flat.validators = [ Validators.required, ...this._validatorsFlat ];
+      this.addressHouse.flat = { ...this.addressHouse.flat };
     }
   }
 

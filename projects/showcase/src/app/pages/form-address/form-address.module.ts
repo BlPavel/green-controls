@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';

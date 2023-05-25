@@ -3,6 +3,7 @@ import { IDataAddress } from 'green-controls/src/interfaces';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IMockAddress } from './interface/mock-address.interface';
 import { MockAddress } from './const/mock.address.const';
+import { dataAddressHouseHome, dataAddressHouseReg } from './const/house.const';
 
 @Component({
   selector: 'app-form-address',
@@ -16,16 +17,34 @@ export class FormAddressComponent implements OnInit {
 
   public isRequiredFlat: boolean = false;
 
+  public isRequiredFlat2: boolean = false;
+
+  public isShow: boolean = true;
+
+  public dataReg = dataAddressHouseReg;
+
+  public dataHouse = dataAddressHouseHome;
+
   constructor(private readonly _fb: FormBuilder) {
     this.form = this._fb.group({
       address: this._fb.control(''),
-      check: this._fb.control(false),
+      check: this._fb.control(true),
+      address2: this._fb.control(''),
+      check2: this._fb.control(false),
     });
   }
 
   ngOnInit(): void {
+    this.isRequiredFlat = this.form.get('check')?.value;
+
     this.form.get('check')?.valueChanges.subscribe((v) => {
       this.isRequiredFlat = v;
+    });
+
+    this.isRequiredFlat2 = this.form.get('check2')?.value;
+
+    this.form.get('check2')?.valueChanges.subscribe((v) => {
+      this.isRequiredFlat2 = v;
     });
   }
 
@@ -78,5 +97,9 @@ export class FormAddressComponent implements OnInit {
       this.dataAddrress.street.valuesAutoComplete = [];
       this.dataAddrress = { ...this.dataAddrress };
     }
+  }
+
+  hide() {
+    this.isShow = !this.isShow;
   }
 }
