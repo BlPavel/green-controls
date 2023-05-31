@@ -162,6 +162,10 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
         this._cdr.markForCheck();
       });
     }
+
+    if (this.form.get('isExistPatronymic')?.value) {
+      this._disabledPatronymic();
+    }
   }
 
   private _disabledPatronymic(): void {

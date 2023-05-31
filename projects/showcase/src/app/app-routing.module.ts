@@ -27,6 +27,12 @@ const routes: Routes = [
     data: { title: 'Form passport' },
   },
   {
+    path: 'form_personal_info',
+    loadChildren: () => import('./pages/form-personal-info/form-personal-info.module').then((m) => m.FormPersonalInfoModule),
+    title: 'Form personal info',
+    data: { title: 'Form personal info' },
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'main',

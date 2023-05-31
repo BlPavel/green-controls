@@ -9,7 +9,7 @@
       ></gr-input-text>
 
       <gr-input-text
-        class="sbi-form__block__col_6 me-md-15"
+        class="sbi-form__block__col_6 ms-md-15"
         formControlName="name"
         [dataInput]="dataPersonalInfo.name"
         grToUppercase
@@ -24,7 +24,9 @@
         grToUppercase
       ></gr-input-text>
       <div class="sbi-form__block__col_6 ms-md-15">
-        <mat-checkbox color="primary" class="checkbox" formControlName="isExistPatronymic"> Отчество отсутствует </mat-checkbox>
+        <mat-checkbox color="primary" class="checkbox" formControlName="isExistPatronymic">
+          Отчество отсутствует
+        </mat-checkbox>
       </div>
     </div>
 
@@ -49,11 +51,11 @@
 
     <div class="sbi-form__block__row">
       <gr-input-text
-      class="sbi-form__block__col_6 me-md-15"
-      formControlName="name"
-      [dataInput]="dataPersonalInfo.name"
-      grToUppercase
-    ></gr-input-text>
+        class="sbi-form__block__col_6 ms-md-15"
+        formControlName="name"
+        [dataInput]="dataPersonalInfo.name"
+        grToUppercase
+      ></gr-input-text>
     </div>
 
     <div class="sbi-form__block__row">
@@ -73,6 +75,4 @@
       ></gr-input-date>
     </div>
   </ng-template>
-
 </form>
-
