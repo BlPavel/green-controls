@@ -16,6 +16,7 @@ export class MainComponent {
     'Form passport',
     'Form personal info',
     'Message error',
+    'Stepper',
   ];
 
   public links: string[] = [
@@ -28,5 +29,6 @@ export class MainComponent {
     '/form_passport',
     '/form_personal_info',
     '/message_error',
+    '/stepper',
   ];
 }

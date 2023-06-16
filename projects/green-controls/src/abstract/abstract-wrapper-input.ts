@@ -133,9 +133,6 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
       this.onChange(value);
       this.changeValue.emit(value);
     });
-
-    this.setValidators();
-    this.setAsyncValidators();
   }
 
   protected onBlur() {

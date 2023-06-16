@@ -1,8 +1,8 @@
 import {
-  Component, OnInit, AfterViewInit, ChangeDetectorRef,
+  Component, AfterViewInit, ChangeDetectorRef,
 } from '@angular/core';
 import { IDataAddress } from 'green-controls/src/interfaces';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IMockAddress } from './interface/mock-address.interface';
 import { MockAddress } from './const/mock.address.const';
 import { dataAddressHouseHome, dataAddressHouseReg } from './const/house.const';
@@ -12,7 +12,7 @@ import { dataAddressHouseHome, dataAddressHouseReg } from './const/house.const';
   templateUrl: './form-address.component.html',
   styleUrls: [ './form-address.component.scss' ],
 })
-export class FormAddressComponent implements OnInit, AfterViewInit {
+export class FormAddressComponent implements AfterViewInit {
   public form!: FormGroup;
 
   public mockAddress: IMockAddress[] = MockAddress;
@@ -38,6 +38,7 @@ export class FormAddressComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.isRequiredFlat = this.form.get('check')?.value;
+    this._cdr.detectChanges();
 
     this.form.get('check')?.valueChanges.subscribe((v) => {
       this.isRequiredFlat = v;
@@ -48,11 +49,6 @@ export class FormAddressComponent implements OnInit, AfterViewInit {
     this.form.get('check2')?.valueChanges.subscribe((v) => {
       this.isRequiredFlat2 = v;
     });
-
-    this._cdr.detectChanges();
-  }
-
-  ngOnInit(): void {
     this._cdr.detectChanges();
   }
 
@@ -62,18 +58,21 @@ export class FormAddressComponent implements OnInit, AfterViewInit {
       valuesAutoComplete: [],
       valueOnDisplay: 'name',
       label: 'region',
+      validators: [ Validators.required ],
     },
     city: {
       displayFn: (item) => item.name,
       valuesAutoComplete: [],
       valueOnDisplay: 'name',
       label: 'city',
+      validators: [ Validators.required ],
     },
     street: {
       displayFn: (item) => item.name,
       valuesAutoComplete: [],
       valueOnDisplay: 'name',
       label: 'street',
+      validators: [ Validators.required ],
     },
   };
 
@@ -107,7 +106,11 @@ export class FormAddressComponent implements OnInit, AfterViewInit {
     }
   }
 
-  hide() {
+  public hide(): void {
     this.isShow = !this.isShow;
+  }
+
+  public onSubmit(): void {
+    console.log(this.form.valid);
   }
 }

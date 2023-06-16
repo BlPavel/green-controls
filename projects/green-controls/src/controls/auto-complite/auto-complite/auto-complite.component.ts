@@ -129,9 +129,6 @@ export class AutoCompliteComponent<T> extends AbstractWrapperInput implements On
           this.changeValue.emit(value);
         }
       });
-
-    this.setValidators();
-    this.setAsyncValidators();
   }
 
   ngAfterContentInit(): void {

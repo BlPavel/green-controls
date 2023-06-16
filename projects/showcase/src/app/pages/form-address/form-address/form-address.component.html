@@ -1,4 +1,4 @@
-<form action="" [formGroup]="form" grMarkAsTouched>
+<form action="" [formGroup]="form" grMarkAsTouched (ngSubmit)="onSubmit()">
   <button type="button" (click)="hide()">Hide</button>
   <div>
     <input type="checkbox" formControlName="check" />
@@ -19,16 +19,6 @@
       [isRequiredFlat]="isRequiredFlat"
       [addressHouse]="dataReg"
     ></gr-form-address>
-    <!--
-    <h1>Control2</h1>
-    <gr-form-address
-      formControlName="address2"
-      [dataAddress]="dataAddrress"
-      (changeRegion)="changeRegion($event)"
-      (changeCity)="changeCity($event)"
-      (changeStreet)="changeStreet($event)"
-      [isRequiredFlat]="isRequiredFlat2"
-      [addressHouse]="dataHouse"
-    ></gr-form-address> -->
   </ng-container>
+  <button type="submit">Submit</button>
 </form>

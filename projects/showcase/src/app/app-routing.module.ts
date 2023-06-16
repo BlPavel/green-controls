@@ -33,6 +33,12 @@ const routes: Routes = [
     data: { title: 'Form personal info' },
   },
   {
+    path: 'stepper',
+    loadChildren: () => import('./pages/stepper/stepper.module').then((m) => m.StepperModule),
+    title: 'Stepper',
+    data: { title: 'Stepper' },
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'main',

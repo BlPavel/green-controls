@@ -323,6 +323,8 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
     this.form.get('street')?.enable();
     this.dataAddress.street.validators = [ ...this._validatorsStreet ];
     this.dataAddress.street = { ...this.dataAddress.street };
+    this.form.get('street')?.setErrors({ required: true });
+    this.form.get('street')?.markAsTouched();
   }
 
   ngOnDestroy(): void {
