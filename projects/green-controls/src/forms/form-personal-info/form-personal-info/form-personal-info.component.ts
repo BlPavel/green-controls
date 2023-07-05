@@ -50,17 +50,17 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
   public dataPersonalInfo: IDataPersonalInfo = {
       surname: {
         label: 'Фамилия',
-        validators: [ Validators.required, Validators.pattern(GreenPattern.namePerson) ],
+        validators: [ Validators.required, Validators.pattern(this._pattern.namePerson) ],
         maxLength: 100,
       },
       name: {
         label: 'Имя',
-        validators: [ Validators.required, Validators.pattern(GreenPattern.namePerson) ],
+        validators: [ Validators.required, Validators.pattern(this._pattern.namePerson) ],
         maxLength: 100,
       },
       patronimyc: {
         label: 'Отчество',
-        validators: [ Validators.pattern(GreenPattern.namePerson) ],
+        validators: [ Validators.pattern(this._pattern.namePerson) ],
         maxLength: 100,
       },
       dateOfBirth: {
@@ -81,6 +81,7 @@ export class FormPersonalInfoComponent implements ControlValueAccessor, Validato
     private readonly _fb: NonNullableFormBuilder,
     private readonly _dateService: DateService,
     private readonly _cdr: ChangeDetectorRef,
+    private readonly _pattern: GreenPattern,
   ) {
     this.form = this._fb.group<IPersonalInfoForm>({
       surname: this._fb.control(''),

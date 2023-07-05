@@ -96,7 +96,7 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
       flat: {
         label: 'Квартира',
         maxLength: 50,
-        validators: [ Validators.pattern(GreenPattern.houseValidationPattern) ],
+        validators: [ Validators.pattern(this._pattern.houseValidationPattern) ],
       },
     };
 
@@ -128,6 +128,7 @@ implements OnChanges, OnInit, AfterContentInit, OnDestroy, ControlValueAccessor,
     private readonly _fb: NonNullableFormBuilder,
     private readonly _cdr: ChangeDetectorRef,
     private readonly _daDataService: DaDataService,
+    private readonly _pattern: GreenPattern,
   ) {
     this.form = this._fb.group<IAddressForm<IRegistrationRegion, IRegistrationCity, IRegistrationStreet>>({
       region: this._fb.control(''),

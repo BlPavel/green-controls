@@ -45,6 +45,7 @@ export class InputEmailComponent extends AbstractWrapperInput implements AfterCo
     private readonly _messageErrorSevice: MessageErrorService,
     private readonly _formGroupDirective: FormGroupDirective,
     private readonly _cdr: ChangeDetectorRef,
+    private readonly _pattern: GreenPattern,
   ) {
     super();
   }
@@ -55,7 +56,7 @@ export class InputEmailComponent extends AbstractWrapperInput implements AfterCo
     this.form = this._formGroupDirective.form;
 
     this.control.addValidators(GreenValidators.greenEmail);
-    this.control.addValidators(Validators.pattern(GreenPattern.enEmailValidationPattern));
+    this.control.addValidators(Validators.pattern(this._pattern.enEmailValidationPattern));
     this._cdr.detectChanges();
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class GreenPattern {
+export class MyPattern {
   public enEmailValidationPattern: string = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,4}$';
 
   public ruEmailValidationPattern: string = '^[а-яА-ЯЁ0-9._-]+@[а-яА-ЯЁ0-9.-]+\\.[а-яА-ЯЁ]{2,4}$';
@@ -14,7 +14,7 @@ export class GreenPattern {
 
   public creditNumber: string = '^[a-zA-Zа-яА-ЯЁё0-9-]{0,}$';
 
-  public namePerson = '^[А-ЯЁ][А-Яа-яЁё\'-\\s]{0,}$';
+  public namePerson = '';
 
   public issuedCodeValidationPattern = '^[0-9-]{6,6}$';
 

@@ -72,13 +72,13 @@ export class FormPassportComponent implements OnChanges, OnInit, ControlValueAcc
         label: 'Кем выдан',
         sizeMinRows: 5,
         maxLength: 500,
-        validators: [ Validators.required, Validators.pattern(GreenPattern.docIssuerValidationPattern) ],
+        validators: [ Validators.required, Validators.pattern(this._pattern.docIssuerValidationPattern) ],
       },
       issuerCode: {
         label: 'Код подразделения',
         mask: '000-000',
         dropSpecialCharacters: false,
-        validators: [ Validators.required, Validators.pattern(GreenPattern.issuedCodeValidationPattern) ],
+        validators: [ Validators.required, Validators.pattern(this._pattern.issuedCodeValidationPattern) ],
       },
     };
 
@@ -87,6 +87,7 @@ export class FormPassportComponent implements OnChanges, OnInit, ControlValueAcc
   constructor(
     private readonly _fb: NonNullableFormBuilder,
     private readonly _dateService: DateService,
+    private readonly _pattern: GreenPattern,
   ) {
     this.form = this._fb.group<IPassportForm>({
       seria: this._fb.control(''),
