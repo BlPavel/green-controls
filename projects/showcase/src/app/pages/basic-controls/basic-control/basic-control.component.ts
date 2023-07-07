@@ -72,7 +72,68 @@ export class BasicControlComponent implements OnInit {
       fromInterface: 'IDataInput',
       description: `
       use for set validators.
-      Optional parametr.`,
+      Optional parametr.
+      Pass array of validators`,
+    },
+    {
+      name: 'asyncValidators',
+      fromInterface: 'IDataInput',
+      description: `
+      use for set async validators.
+      Optional parametr.
+      Pass array of async validators`,
+    },
+    {
+      name: 'autoComplete',
+      fromInterface: 'IDataInput',
+      description: `
+      use for delete autocomplete in input.
+      Optional parametr.
+      Pass none or off to delete autocomplete`,
+    },
+    {
+      name: 'mask',
+      fromInterface: 'IDataInput',
+      description: `
+      use for set mask in input.
+      Optional parametr.
+      In tel-input default parametr (000)-000-00-00.
+      For more information see documentation ngx-mask`,
+    },
+    {
+      name: 'prefix',
+      fromInterface: 'IDataInput',
+      description: `
+      use for set prefix before mask.
+      Optional parametr.
+      In tel-input default parametr +7.
+      For more information see documentation ngx-mask`,
+    },
+    {
+      name: 'suffix',
+      fromInterface: 'IDataInput',
+      description: `
+      use for set suffix after mask.
+      Optional parametr.
+      For more information see documentation ngx-mask`,
+    },
+    {
+      name: 'showMaskTyped',
+      fromInterface: 'IDataInput',
+      description: `
+      use for show or hide mask typed.
+      Default value false.
+      Optional parametr.
+      For more information see documentation ngx-mask`,
+    },
+    {
+      name: 'dropSpecialCharacters',
+      fromInterface: 'IDataInput',
+      description: `
+      use for delete special characters.
+      Default value true.
+      Optional parametr.
+      For more information see documentation ngx-mask`,
     },
   ];
 

@@ -1,28 +1,30 @@
-<h4>Api</h4>
-<span>{{ api }}</span>
-<h4>Input parametrs</h4>
-<span></span>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>From interface</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let parametr of inputParametrs">
-      <td>{{ parametr.name }}</td>
-      <td>{{ parametr.fromInterface }}</td>
-      <td>{{ parametr.description }}</td>
-    </tr>
-  </tbody>
-</table>
-<h4>Use components</h4>
-<div *ngFor="let component of useComponents">{{ component }}</div>
+<div class="main">
+  <h4>Api</h4>
+  <span class="text">{{ api }}</span>
+  <h4>Input parametrs</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>From interface</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parametr of inputParametrs">
+        <td>{{ parametr.name }}</td>
+        <td>{{ parametr.fromInterface }}</td>
+        <td>{{ parametr.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>Use components</h4>
+  <div *ngFor="let component of useComponents">{{ component }}</div>
 
-<form action="" [formGroup]="form">
-  <gr-input-text formControlName="inputText" [dataInput]="dataInputText"></gr-input-text>
-  <gr-input-email></gr-input-email>
-  <button type="button" (click)="setError()">click</button>
-</form>
+  <form action="" [formGroup]="form">
+    <gr-input-text formControlName="inputText" [dataInput]="dataInputText"></gr-input-text>
+    <gr-input-email></gr-input-email>
+    <button type="button" (click)="setError()">click</button>
+  </form>
+</div>
+
