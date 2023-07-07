@@ -10,6 +10,11 @@ interface IInputParametrs {
   description: string
 }
 
+interface IOutputParametrs {
+  name: string,
+  description: string
+}
+
 @Component({
   selector: 'app-basic-control',
   templateUrl: './basic-control.component.html',
@@ -134,6 +139,13 @@ export class BasicControlComponent implements OnInit {
       Default value true.
       Optional parametr.
       For more information see documentation ngx-mask`,
+    },
+  ];
+
+  public outputParametrs: IOutputParametrs[] = [
+    {
+      name: 'changeValue',
+      description: 'emit value every change value in input',
     },
   ];
 

@@ -39,6 +39,16 @@ a {
   h4 {
     font-size: min(6vw, 20px);
   }
+  h5 {
+    font-size: min(5vw, 18px);
+    margin-bottom: 4px;
+  }
+
+  .col{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .text {

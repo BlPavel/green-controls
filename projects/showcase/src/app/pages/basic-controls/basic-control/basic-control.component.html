@@ -18,12 +18,33 @@
       </tr>
     </tbody>
   </table>
-  <h4>Use components</h4>
-  <div *ngFor="let component of useComponents">{{ component }}</div>
+  <h4>Output parametrs</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parametr of outputParametrs">
+        <td>{{ parametr.name }}</td>
+        <td>{{ parametr.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>Examples</h4>
+  <h5>Code</h5>
+  <div class="col">
+    <span class="text">Input email: <i>{{ useComponents[0] }}</i></span>
+    <span class="text">Input number: <i>{{ useComponents[1] }}</i></span>
+    <span class="text">Input tel: <i>{{ useComponents[2] }}</i></span>
+    <span class="text">Input text: <i>{{ useComponents[3] }}</i></span>
+  </div>
 
-  <form action="" [formGroup]="form">
+  <form [formGroup]="form">
     <gr-input-text formControlName="inputText" [dataInput]="dataInputText"></gr-input-text>
-    <gr-input-email></gr-input-email>
+    <gr-input-email formControlName="inputText"></gr-input-email>
     <button type="button" (click)="setError()">click</button>
   </form>
 </div>
