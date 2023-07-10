@@ -1,6 +1,6 @@
 {
   "name": "green-controls",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "license": "UNLICENSED",
   "peerDependencies": {
     "@angular/animations": "^15.2.0",
