@@ -60,6 +60,14 @@ export class InputEmailComponent extends AbstractWrapperInput implements AfterCo
     this._cdr.detectChanges();
   }
 
+  public onPaste(event: Event): void {
+    event.preventDefault();
+  }
+
+  public onCopy(event: Event): void {
+    event.preventDefault();
+  }
+
   validate(): ValidationErrors | null {
     return this.control.invalid ? { invalid: true } : null;
   }

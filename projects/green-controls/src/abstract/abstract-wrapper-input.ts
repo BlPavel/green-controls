@@ -1,5 +1,5 @@
 import {
-  Directive, EventEmitter, OnChanges, OnDestroy, OnInit, Output, SimpleChanges,
+  Directive, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges,
 } from '@angular/core';
 import {
   AsyncValidatorFn,
@@ -12,6 +12,9 @@ import { ICustomMessageError } from 'green-controls/src/interfaces';
 export abstract class AbstractWrapperInput implements ControlValueAccessor, OnChanges, OnInit, OnDestroy {
   @Output()
   public changeValue: EventEmitter<unknown> = new EventEmitter<unknown>();
+
+  @Input()
+  public toTrim: boolean = true;
 
   protected customErrorMessage?: ICustomMessageError;
 
@@ -138,6 +141,9 @@ export abstract class AbstractWrapperInput implements ControlValueAccessor, OnCh
   protected onBlur() {
     this.onTouched();
     this.control.updateValueAndValidity({ emitEvent: false });
+    if (this.toTrim && typeof this.control.value === 'string') {
+      this.control.setValue(this.control.value.trim());
+    }
   }
 
   protected setLabelAndPlaceholder(): void {

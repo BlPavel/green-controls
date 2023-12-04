@@ -22,6 +22,8 @@
     [isDisabled]="isDisabled"
     autocomplete="none"
     autocomplete="of"
+    (copy)="onCopy($event)"
+    (paste)="onPaste($event)"
   />
   <mat-error *ngIf="messageError$ | async as messageError">{{ messageError }}</mat-error>
 </mat-form-field>
